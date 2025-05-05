@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import "./App.css";
 import CuentaRegresiva from "./reloj";
 import ProductoCard from "./ProductosCard";
+import ModalCarrito from "./ModalCarrito"; // Importa el modal
 import productos from "./productos";
 import fondo from './imagen/fondo.png';
-
 
 const imagenes = [
   "/Imagen/images1.png",
@@ -12,17 +12,16 @@ const imagenes = [
   "/Imagen/images3.png",
   "/Imagen/images4.png",
   "/Imagen/images5.png",
- 
 ];
 
 function App() {
   const [index, setIndex] = useState(0);
   const [carrito, setCarrito] = useState([]);
+  const [modalVisible, setModalVisible] = useState(false); // Estado para controlar el modal
 
   const siguiente = () => setIndex((index + 1) % imagenes.length);
   const anterior = () => setIndex((index - 1 + imagenes.length) % imagenes.length);
 
-  // Función para agregar un producto al carrito
   const agregarAlCarrito = (producto) => {
     const productoExistente = carrito.find((item) => item.id === producto.id);
 
@@ -64,6 +63,8 @@ function App() {
     0
   );
 
+  const toggleModal = () => setModalVisible(!modalVisible); // Alternar visibilidad del modal
+
   return (
     <div
       style={{
@@ -79,25 +80,21 @@ function App() {
     >
       <div className="contenedor">
 
-      <div className="carrito">
-          <h2>Carrito</h2>
-          {carrito.length === 0 ? (
-            <p>El carrito está vacío</p>
-          ) : (
-            <>
-              <ul>
-                {carrito.map((item, index) => (
-                  <li key={index}>
-                    {item.nombre} - Cantidad: {item.cantidad} - Precio: ${item.precio} - Total: ${item.precio * item.cantidad}
-                    <button onClick={() => eliminarDelCarrito(item.id)}>Eliminar</button>
-                  </li>
-                ))}
-              </ul>
-              <h3>Total del carrito: ${totalCarrito}</h3>
-            </>
-          )}
-        </div>
-        
+        {/* Botón para abrir el modal */}
+        <button className="abrir-modal" onClick={toggleModal}>
+          CARRITO
+        </button>
+
+        {/* Modal */}
+        {modalVisible && (
+          <ModalCarrito
+            carrito={carrito}
+            totalCarrito={totalCarrito}
+            eliminarDelCarrito={eliminarDelCarrito}
+            onClose={toggleModal}
+          />
+        )}
+
         <div className="App">
           <CuentaRegresiva fechaObjetivo="2025-12-31T00:00:00" />
         </div>
@@ -111,11 +108,11 @@ function App() {
         <div className="catalogo">
           <h1>Catálogo de Productos</h1>
           <div className="catalogo-grid">
-          {productos.map((producto) => (
+            {productos.map((producto) => (
               <ProductoCard 
                 key={producto.id} 
                 producto={producto} 
-                onAgregar={agregarAlCarrito} // Pasar la función como prop
+                onAgregar={agregarAlCarrito} 
               />
             ))}
           </div>
@@ -125,4 +122,5 @@ function App() {
     </div>
   );
 }
+
 export default App;
