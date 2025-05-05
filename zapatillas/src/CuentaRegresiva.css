@@ -1,0 +1,26 @@
+.reloj {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+  font-family: 'Arial', sans-serif;
+}
+
+.reloj .unidad {
+  text-align: center;
+}
+
+.reloj .numero {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #e0f718;
+}
+
+.reloj .label {
+  font-size: 0.9rem;
+  color: #56f119;
+}
+.cuenta-regresiva {
+ background-image: url('../public/imagen/viernes.png');
+  
+}
