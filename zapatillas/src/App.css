@@ -83,3 +83,38 @@ body {
   gap: 1.5rem;
   padding: 0 1rem;
 }
+
+.carrito {
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
+  border: 2px solid #ccc; /* Borde gris claro */
+  border-radius: 8px; /* Bordes redondeados */
+  padding: 16px; /* Espaciado interno */
+  margin: 16px auto; /* Espaciado externo */
+  width: 80%; /* Ancho del carrito */
+  max-width: 400px; /* Ancho máximo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+}
+
+.carrito h2 {
+  font-size: 1.5rem; /* Tamaño del título */
+  color: #333; /* Color del texto */
+  text-align: center; /* Centrar el texto */
+  margin-bottom: 12px; /* Espaciado debajo del título */
+}
+
+.carrito ul {
+  list-style-type: none; /* Quitar viñetas */
+  padding: 0; /* Quitar padding */
+  margin: 0; /* Quitar margen */
+}
+
+.carrito li {
+  font-size: 1rem; /* Tamaño del texto */
+  color: #555; /* Color del texto */
+  padding: 8px; /* Espaciado interno */
+  border-bottom: 1px solid #ddd; /* Línea divisoria */
+}
+
+.carrito li:last-child {
+  border-bottom: none; /* Quitar línea divisoria del último elemento */
+}

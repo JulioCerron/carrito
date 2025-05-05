@@ -16,9 +16,17 @@ const imagenes = [
 
 function App() {
   const [index, setIndex] = useState(0);
+  const [carrito, setCarrito] = useState([]);
 
   const siguiente = () => setIndex((index + 1) % imagenes.length);
   const anterior = () => setIndex((index - 1 + imagenes.length) % imagenes.length);
+
+  // Función para agregar un producto al carrito
+  const agregarAlCarrito = (producto) => {
+    setCarrito([...carrito, producto]);
+    console.log(`Producto agregado al carrito: ${producto.nombre}`);
+    console.log(carrito);
+  };
 
   return (
     <div
@@ -35,6 +43,14 @@ function App() {
     >
       <div className="contenedor">
 
+      <div className="carrito">
+          <h2>Carrito</h2>
+          <ul>
+            {carrito.map((item, index) => (
+              <li key={index}>{item.nombre}</li>
+            ))}
+          </ul>
+        </div>
         
         <div className="App">
           <CuentaRegresiva fechaObjetivo="2025-12-31T00:00:00" />
@@ -49,11 +65,16 @@ function App() {
         <div className="catalogo">
           <h1>Catálogo de Productos</h1>
           <div className="catalogo-grid">
-            {productos.map((producto) => (
-              <ProductoCard key={producto.id} producto={producto} />
+          {productos.map((producto) => (
+              <ProductoCard 
+                key={producto.id} 
+                producto={producto} 
+                onAgregar={agregarAlCarrito} // Pasar la función como prop
+              />
             ))}
           </div>
         </div>
+
       </div>
     </div>
   );
